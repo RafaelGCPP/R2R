@@ -16,12 +16,12 @@ private:
 	double* Rp;
 	double* Rs;
 
-	void generate_instance();
 public:
 	R2R(const unsigned char nb, const double v, const double rb, const double tol);
 	~R2R();
 
 	Thevenin compute(const unsigned long value);
+	void generate_instance();
 
 };
 
