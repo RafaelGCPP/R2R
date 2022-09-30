@@ -1,4 +1,8 @@
 #pragma once
+#include <chrono>
+
+#include<random>
+#include<functional>
 #include "Thevenin.h"
 
 /***

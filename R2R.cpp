@@ -1,33 +1,39 @@
 #include "R2R.h"
-#include<random>
-#include<functional>
 
 /***
 * Generates an R2R instance based on the base resistance and tolerance
 */
 void R2R::generate_instance()
 {
-	std::default_random_engine generator;
-	std::uniform_real_distribution<double> distribution(-tolerance, tolerance);
-	auto p = std::bind(distribution, generator);
 
+
+
+	//unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
+	//std::default_random_engine rd(seed);
+
+	std::random_device rd;
+	std::uniform_real_distribution<double> tol_dist(-tolerance, tolerance);
+
+	
 	for (unsigned char j = 0; j < nbits; j++) {
 
-		Rp[j] = 2 * Rbase * (1 + p());
-		Rs[j] = Rbase * (1 + p());
+		Rp[j] = 2 * Rbase * (1 + tol_dist(rd));
+		Rs[j] = Rbase * (1 + tol_dist(rd));
 	}
-	Rt = 2 * Rbase * (1 + p());
+	Rt = 2 * Rbase * (1 + tol_dist(rd));
 }
 
 /***
 * Constructor and destructor for the class
 */
 R2R::R2R(const unsigned char nb, const double v = 1, const double rb = 1, const double tol = 0)
-	:nbits(nb), V(v), Rbase(rb), tolerance(tol)
+	:nbits(nb), V(v), Rbase(rb), tolerance(tol) 
 {
 	Rp = new double[nbits];
 	Rs = new double[nbits];
+	
 	generate_instance();
+	
 }
 
 R2R::~R2R()
