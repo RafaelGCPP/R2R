@@ -1,11 +1,15 @@
 #pragma once
+#include "Thevenin.h"
 
+/***
+* A class representing a R-2R DAC 
+*/
 class R2R
 {
 private:
 	unsigned char nbits;
 	unsigned long maxval;
-	double precision;
+	double tolerance;
 	double Rbase;
 	double V;
 	double Rt;
@@ -14,10 +18,10 @@ private:
 
 	void generate_instance();
 public:
-	R2R(const unsigned char nb, const double v, const double rb, const double p);
+	R2R(const unsigned char nb, const double v, const double rb, const double tol);
 	~R2R();
 
-	double compute(const unsigned long value);
+	Thevenin compute(const unsigned long value);
 
 };
 

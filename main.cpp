@@ -8,12 +8,14 @@
 
 int main()
 {
-	R2R DAC(8,5,1000,0.05);
-
 	int nbits = 8, maxval = 1 << nbits;
+	double voltage = 5;
+	double resistance = 1000;
+	double tolerance = 5. / 100.;
+	R2R DAC(nbits,voltage,resistance,tolerance);
 
 	for (int i = 0; i < maxval; i++) {
 
-		std::cout << DAC.compute(i) << std::endl;
+		std::cout << DAC.compute(i).getV() << std::endl;
 	}
 }

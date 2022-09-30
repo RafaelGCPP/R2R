@@ -1,4 +1,8 @@
 #pragma once
+
+/***
+* A class representing a Thevenin equivalent network, i.e. a voltage source in series with a resistance
+*/
 class Thevenin
 {
 private:

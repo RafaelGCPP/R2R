@@ -1,5 +1,8 @@
 #include "Thevenin.h"
 
+/***
+* Computes the Thevenin equivalent of two Thevenin equivalent networks in parallel.
+*/
 Thevenin Thevenin::parallel(const Thevenin& t2)
 {
     double v = (t2.R * V + R * t2.V) / (R + t2.R);
@@ -7,6 +10,9 @@ Thevenin Thevenin::parallel(const Thevenin& t2)
     return Thevenin(v,r);
 }
 
+/***
+* Computes the Thevenin equivalent of two Thevenin equivalent networks in series.
+*/
 Thevenin Thevenin::series(const Thevenin& t2)
 {
     return Thevenin(V+t2.V, R+t2.R);
