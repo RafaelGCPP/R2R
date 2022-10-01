@@ -14,7 +14,12 @@ int main()
 	double tolerance = 1. / 100.;
 	R2R DAC(nbits, voltage, resistance, tolerance);
 
-	double v_avg[maxval], v_var[maxval], v_dev[maxval], v_min[maxval], v_max[maxval];
+	double
+		* v_avg = new double[maxval],
+		* v_var = new double[maxval],
+		* v_dev = new double[maxval],
+		* v_min = new double[maxval],
+		* v_max = new double[maxval];
 	int runs = 10000;
 
 	for (int i = 0; i < maxval; i++) {
@@ -46,10 +51,15 @@ int main()
 
 	for (int i = 0; i < maxval; i++) {
 		std::cout << i << ", ";
-		std::cout << v_avg[i] <<", " ;
+		std::cout << v_avg[i] << ", ";
 		std::cout << v_dev[i] << ", ";
 		std::cout << v_min[i] << ", ";
 		std::cout << v_max[i] << std::endl;
 	}
 
+	delete[] v_avg;
+	delete[] v_var;
+	delete[] v_dev;
+	delete[] v_min;
+	delete[] v_max;
 }
